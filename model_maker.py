@@ -1,6 +1,9 @@
 import pandas as pd
 import seaborn as sns
+import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier
+import pickle
 
 troop_movements = pd.read_csv('troop_movements.csv')
 # troop_movements.head()
