@@ -55,3 +55,21 @@ print(accuracy)
 
 with open('trained_model.pkl', 'wb') as file:
     pickle.dump(model, file)
+
+# Get feature importances
+importances = model.feature_importances_
+
+# Create a DataFrame to hold the feature importances
+feature_importances = pd.DataFrame({'Feature': X_encoded.columns, 'Importance': importances}).sort_values('Importance', ascending=False)
+print(feature_importances.head())
+
+plt.figure(figsize=(10,10))
+sns.barplot(x=feature_importances['Feature'], y=feature_importances['Importance'])
+plt.xticks(rotation='vertical')
+plt.xlabel('Feature')
+plt.ylabel('Importance')
+plt.title('Feature Importances')
+plt.savefig('feature_importances.png')
+plt.show()
+
+print(f'Most Influential Unit Type: {feature_importances['Feature'][0]}')
