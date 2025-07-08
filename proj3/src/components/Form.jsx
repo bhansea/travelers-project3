@@ -13,7 +13,7 @@ function Form() {
         <div className="container">
             <form onSubmit={handleSubmit} className="mt-5">
                 <div className="form-group">
-                    <label htmlFor="homeworld">Homeworld</label>
+                    <label htmlFor="homeworld">Homeworld </label>
                     <input
                         type="text"
                         className="form-control"
@@ -24,7 +24,7 @@ function Form() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="unitType">Unit Type</label>
+                    <label htmlFor="unitType">Unit Type </label>
                     <input
                         type="unitType"
                         className="form-control"
@@ -34,7 +34,7 @@ function Form() {
                         onChange={(e) => setUnitType(e.target.value)}
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary" style={{marginTop:20}}>Submit</button>
             </form>
         </div>
     );
