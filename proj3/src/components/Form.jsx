@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 function Form() {
     const [homeworld, setHomeworld] = useState('');
     const [unitType, setUnitType] = useState('');
+    const [prediction, setPrediction] = useState(null);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
