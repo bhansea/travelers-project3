@@ -1,4 +1,6 @@
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 troop_movements = pd.read_csv('troop_movements.csv')
 # troop_movements.head()
@@ -21,12 +23,12 @@ character_by_unit_type_counts = troop_movements.groupby('unit_type').agg({
 
 print(character_by_unit_type_counts)
 
-# def isResistance(e_or_r):
-#     for type in e_or_r:
-#         if type == 'empire':
-#             print(False)
-#         else:
-#             print(True)
+# Engineer is_resistance feature
+troop_movements['is_resistance'] = troop_movements['empire_or_resistance'].str.lower() == 'resistance'
 
-# troop_movements['is_resistance'] = troop_movements.apply(isResistance(troop_movements['empire_or_resistance']))
-# print(troop_movements.head())
+# Empire vs Resistance distribution using Seaborn
+sns.countplot(data=troop_movements, x="empire_or_resistance", palette="dark")
+plt.title("Character Count by Empire or Resistance")
+plt.xlabel("Empire or Resistance")
+plt.ylabel("Count")
+plt.show()
