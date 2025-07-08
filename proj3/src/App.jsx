@@ -10,7 +10,7 @@ function App() {
     <>
       <div>
         <a target="_blank">
-          <img src={logo} className="logo react" alt="React logo" />
+          <img src={logo} className="logo react" alt="logo" />
         </a>
       </div>
       <h2>Empire or Resistance Prediction Model</h2>
