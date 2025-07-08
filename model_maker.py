@@ -3,6 +3,8 @@ import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 import pickle
 
 troop_movements = pd.read_csv('troop_movements.csv')
@@ -28,6 +30,7 @@ print(character_by_unit_type_counts)
 
 # Engineer is_resistance feature
 troop_movements['is_resistance'] = troop_movements['empire_or_resistance'].str.lower() == 'resistance'
+print(troop_movements)
 
 # Empire vs Resistance distribution using Seaborn
 sns.countplot(data=troop_movements, x="empire_or_resistance", palette="dark")
@@ -35,3 +38,20 @@ plt.title("Character Count by Empire or Resistance")
 plt.xlabel("Empire or Resistance")
 plt.ylabel("Count")
 plt.show()
+
+X, y = troop_movements[['homeworld', 'unit_type']], troop_movements['is_resistance']
+
+X_encoded = pd.get_dummies(X, columns=['homeworld', 'unit_type'])
+
+X_train, X_test, y_train, y_test = train_test_split(X_encoded, y, test_size=0.2, random_state=42)
+
+model = DecisionTreeClassifier(max_depth=3, random_state=42)
+model.fit(X_train, y_train)
+
+predictions = model.predict(X_test)
+
+accuracy = accuracy_score(predictions, y_test)
+print(accuracy)
+
+with open('trained_model.pkl', 'wb') as file:
+    pickle.dump(model, file)
