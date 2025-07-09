@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 import pickle
 import pandas as pd
@@ -26,6 +26,12 @@ def predict():
 
     prediction = model.predict(encoded)[0]
     return jsonify({"prediction": "resistance" if prediction else "empire"})
+
+@app.route("/api/feature_importance")
+def feat_imp():
+    image_path = "C:/travelers-project3/feature_importances.png"
+
+    return send_file(image_path, mimetype='image/png')
 
 if __name__ == "__main__":
     app.run(port=5001, debug=True)

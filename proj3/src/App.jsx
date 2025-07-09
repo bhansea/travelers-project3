@@ -3,6 +3,7 @@ import logo from './assets/Star-Wars-Logo-1.png'
 import './App.css'
 
 import Form from "./components/Form.jsx"
+import FeatureImportance from './components/FeatureImportance.jsx'
 
 function App() {
 
@@ -19,6 +20,9 @@ function App() {
       </p>
       <div className="card">
         <Form />
+      </div>
+      <div>
+        <FeatureImportance />  
       </div>
     </>
   )
