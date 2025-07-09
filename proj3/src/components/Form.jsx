@@ -7,6 +7,23 @@ function Form() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        try {
+            const response = await fetch('http://localhost:5001/api/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ homeworld, unit_type: unitType })
+            });
+
+            const data = await response.json();
+            setPrediction(data.prediction);
+
+        } catch (error) {
+            console.error("Error: ", error);
+            setPrediction("Error fetching prediction")
+        }
         console.log(homeworld, unitType);
     };
 
@@ -35,8 +52,14 @@ function Form() {
                         onChange={(e) => setUnitType(e.target.value)}
                     />
                 </div>
-                <button type="submit" className="btn btn-primary" style={{marginTop:20}}>Submit</button>
+                <button type="submit" className="btn btn-primary" style={{margin:20}}>Submit</button>
             </form>
+
+            {prediction && (
+                <div className="alert" role="alert">
+                    Prediction: <strong>{prediction}</strong>
+                </div>
+            )}
         </div>
     );
 }
